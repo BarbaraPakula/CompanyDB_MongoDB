@@ -56,27 +56,28 @@ router.put('/departments/:id', async (req, res) => {
   const { name } = req.body;
 
   try {
-    const dep = await(Department.findById(req.params.id));
-    if(dep) {
-      dep.name = name;
-      await dep.save();
-      res.json({ message: 'OK' });
+    const departmentAfterChange = await(Department.findById(req.params.id));
+    if(departmentAfterChange) {
+      departmentAfterChange.name = name;
+      await departmentAfterChange.save();
+      res.json({ message: 'OK', departmentAfterChange });
     }
     else res.status(404).json({ message: 'Not found...' });
   }
   catch(err) {
     res.status(500).json({ message: err });
   }
-
 });
 
 router.delete('/departments/:id', async (req, res) => {
   try {
-    const dep = await(Department.findById(req.params.id));
-if(dep){
-  await Department.deleteOne({ _id: req.params.id});
-  res.json({ message: 'OK' });
+    const delatedDepartment = await(Department.findById(req.params.id));
+if(delatedDepartment){
+  await Department.deleteOne({ _id: req.params.id,});
+  res.json({ message: 'OK', delatedDepartment });
 }
+else res.status(404).json({ message: 'Not found...' });
+
    }
   catch(err) {
     res.status(500).json({ message: err });
