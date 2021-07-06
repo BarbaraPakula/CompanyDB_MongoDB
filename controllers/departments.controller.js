@@ -55,7 +55,9 @@ exports.putById = async (req, res) => {
 };
 exports.deleteById = async (req, res) => {
   try {
-    const delatedDepartment = await Department.findById(req.params.id);
+    const delatedDepartment = await Departme
+
+    nt.findById(req.params.id);
     if (delatedDepartment) {
       await Department.deleteOne({ _id: req.params.id });
       res.json({ message: 'OK', delatedDepartment });
