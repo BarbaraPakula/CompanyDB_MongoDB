@@ -14,6 +14,9 @@ describe('Employee', () => {
         console.log(err);
       }
     });
+    after(() => {
+      mongoose.models = {};
+    });
 
     describe('Reading data', () => {
       let depId;
