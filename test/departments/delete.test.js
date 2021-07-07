@@ -13,19 +13,17 @@ describe('DELETE /api/departments/:id', () => {
   before(async () => {
     const testDepOne = new Department({ _id: '5d9f1140f10a81216cfd4408', name: 'Department #1' });
     await testDepOne.save();
-
-  });
-  after(async () => {
-    await Department.deleteMany();
   });
 
-  it('/:id should remove chosen document and return success', async () => {
+  it('/:id should delete chosen document and return success', async () => {
     const res = await request(server).delete('/api/departments/5d9f1140f10a81216cfd4408');
-    const deletedDepartment = await Department.findOne({ name: '#Department #1' });
+    const deletedDepartment = await Department.findOne({ _id: '5d9f1140f10a81216cfd4408' });
     expect(res.status).to.be.equal(200);
     expect(res.body.message).to.be.equal('OK');
     expect(deletedDepartment).to.be.null;
   });
 
-
+  after(async () => {
+    await Department.deleteMany();
+  });
 });
