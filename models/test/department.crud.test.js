@@ -135,4 +135,8 @@ describe('Department', () => {
       expect(departments.length).to.be.equal(0);
     });
   });
+
+  after(() => {
+    mongoose.models = {};
+  });
 });
